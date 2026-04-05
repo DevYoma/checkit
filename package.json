@@ -1,0 +1,28 @@
+{
+  "name": "checkit",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.90.21",
+    "axios": "^1.13.5",
+    "next": "16.2.2",
+    "nuqs": "^2.8.9",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.0",
+    "@types/react": "19.0.0",
+    "@types/react-dom": "19.0.0",
+    "eslint": "9.0.0",
+    "eslint-config-next": "16.2.2",
+    "sass": "^1.99.0",
+    "typescript": "5.3.3"
+  }
+}

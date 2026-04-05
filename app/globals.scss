@@ -1,0 +1,131 @@
+// Basic SCSS variables
+$bg-color: #ffffff;
+$text-color: #18181b;
+$card-bg: #ffffff;
+$card-border: #e4e4e7;
+$accent-color: #71717a;
+
+// Dark mode variables (simulated)
+@media (prefers-color-scheme: dark) {
+  $bg-color: #09090b;
+  $text-color: #fafafa;
+  $card-bg: #09090b;
+  $card-border: #27272a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  background-color: $bg-color;
+  color: $text-color;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.p-4 { padding: 1rem; }
+.py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-12 { margin-bottom: 3rem; }
+
+header {
+  text-align: center;
+  h1 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+  p {
+    font-size: 1.125rem;
+    color: $accent-color;
+  }
+}
+
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: 640px) { grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 768px) { grid-template-columns: repeat(3, 1fr); }
+  @media (min-width: 1024px) { grid-template-columns: repeat(4, 1fr); }
+}
+
+.pokemon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  background: $card-bg;
+  border: 1px solid $card-border;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .image-container {
+    width: 8rem;
+    height: 8rem;
+    background: #f4f4f5; // zinc-100
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+
+    @media (prefers-color-scheme: dark) {
+        background: #18181b; // zinc-900
+    }
+
+    img {
+      width: 6rem;
+      height: 6rem;
+      object-fit: contain;
+    }
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin-bottom: 0.25rem;
+  }
+
+  .id-badge {
+    background: #f4f4f5; // zinc-100
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #71717a; // zinc-500
+    margin-bottom: 1rem;
+
+    @media (prefers-color-scheme: dark) {
+        background: #27272a; // zinc-800
+    }
+  }
+
+  .url-text {
+    width: 100%;
+    border-top: 1px solid $card-border;
+    padding-top: 1rem;
+    font-size: 10px;
+    font-family: monospace;
+    color: #a1a1aa; // zinc-400
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
