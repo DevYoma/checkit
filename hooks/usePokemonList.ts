@@ -1,7 +1,7 @@
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { pokemonService } from '@/lib/services/pokemon.service';
 import { pokemonKeys } from '@/lib/query-keys';
-import { PokemonListResponse } from '@/types/pokemon';
+import { PokemonListResponse } from '@/types/pokemon.types';
 
 const LIMIT = 20;
 

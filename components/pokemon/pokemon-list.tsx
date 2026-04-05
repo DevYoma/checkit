@@ -8,7 +8,7 @@ import PaginationControls from './pagination-controls';
 import PokemonSearchInput from './pokemon-search-input';
 import PokemonCard from './pokemon-card';
 import EmptyState from '@/components/ui/empty-state';
-import { PokemonListResponse } from '@/types/pokemon';
+import { PokemonListResponse } from '@/types/pokemon.types';
 
 interface PokemonListProps {
   initialData: PokemonListResponse;

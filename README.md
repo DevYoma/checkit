@@ -9,9 +9,10 @@ A production-ready Pokédex built with Next.js 14+ App Router, TypeScript, and T
 
 ## Getting Started (Project Setup)
 
-First, run the development server:
-
 ```bash
+git clone https://github.com/DevYoma/checkit.git
+cd checkit
+npm install
 npm run dev
 ```
 
@@ -27,8 +28,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ---
 
 ## Lighthouse Score
+
 ![Light house Home Page Image Result](image-5.png)
 ![Light house Detail Page Image Result](image-4.png)
+
 ---
 
 ## Key Features
@@ -72,6 +75,8 @@ Used **Server Components** to fetch the initial Pokémon list and passed the dat
 
 Built a reusable `PokemonCard` component used in both the list and search result views.
 
+All shared types are defined in `types/pokemon.types.ts` — no inline type definitions for reused shapes.
+
 ---
 
 ### 4. Pagination
@@ -107,16 +112,35 @@ Dynamic route `/pokemon/[name]` using a **Server Component**:
 
 ### 8. Performance Optimizations
 
-- Used `next/image` for optimized images
-- Applied **fetch caching strategies** (`revalidate: 60` for lists, `force-cache` for details)
+| Optimization | What | Why |
+|---|---|---|
+| `next/image` | Replaced all `<img>` tags | Automatic compression, lazy loading, no layout shift |
+| `revalidate: 60` | Pokémon list fetch | Serves from cache, revalidates every 60s in background |
+| `force-cache` | Pokémon detail fetch | Pokémon stats never change — permanent cache hit after first visit |
+| `next/font/google` | Nunito font | Prevents layout shift (CLS) during font load |
 
 ---
 
 ### 9. Testing
 
 - Used **Vitest** with **React Testing Library (RTL)**
-- Tested `PokemonCard` UI rendering and `PokemonList` empty state
+- Tested `PokemonCard` UI rendering and `PokemonList` state
 
 ```bash
 npm run test
 ```
+
+---
+
+## Trade-offs & Limitations
+
+- **Search is exact-match only** — The PokéAPI does not support partial/fuzzy search. Searching "pika" won't return Pikachu; you need the full name.
+- **Query Key Factory** — Adds a small layer of abstraction that can feel like overhead in a small app, but pays off significantly as the codebase scales.
+- **No authentication** — The PokéAPI is fully public, so no auth layer was needed or implemented.
+- **Styling** — Used SCSS over Tailwind to keep the setup minimal. The UI is clean but could be more polished with more time.
+
+---
+
+## What Would I Improve With 2 More Hours?
+
+I would probably deploy to **Cloudflare Workers**, as I haven't done it before and it would be a great learning opportunity. I would also pay more attention to the **styling of the application** — the functionality is solid, but the UI could be more polished and visually impressive.
