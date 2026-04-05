@@ -41,64 +41,61 @@ export default async function PokemonDetailPage({ params }: Props) {
   const imageUrl = pokemon.sprites.other?.['official-artwork'].front_default || pokemon.sprites.front_default;
 
   return (
-    <main className="container p-6">
-      <nav className="mb-6">
-        <Link href="/" className="back-link inline-block py-2 text-blue-600 hover:underline">
-          ← Back to list
-        </Link>
-      </nav>
+    <main className="detail-page">
+      <Link href="/" className="back-btn">
+        ← Back to Explorer
+      </Link>
 
-      <article className="pokemon-detail">
-        <header className="mb-8">
-          <h1 className="capitalize text-4xl font-bold">{pokemon.name}</h1>
-          <p className="text-zinc-500">ID: #{String(pokemon.id).padStart(3, '0')}</p>
-        </header>
+      <article>
+        <div className="detail-header">
+          <h1>{pokemon.name}</h1>
+          <p className="detail-id">#{String(pokemon.id).padStart(4, '0')}</p>
+        </div>
 
-        <section className="grid md:grid-cols-2 gap-12 items-start">
-          <div className="image-wrapper bg-zinc-100 rounded-lg p-8 relative h-[400px] w-full">
-            <Image 
-              src={imageUrl} 
-              alt={pokemon.name} 
+        <div className="detail-grid">
+          {/* Image — parent MUST be position:relative for next/image fill */}
+          <div className="detail-image-wrapper">
+            <Image
+              src={imageUrl}
+              alt={pokemon.name}
               fill
-              priority={true} // Above-the-fold image for detail page
-              className="object-contain p-4"
-              unoptimized={true}
+              priority
+              unoptimized
             />
           </div>
 
-          <div className="stats-info space-y-6">
+          <div className="detail-stats">
             <div>
-              <h2 className="text-xl font-semibold mb-2">Metadata</h2>
-              <ul className="space-y-2">
+              <h2>Metadata</h2>
+              <ul className="meta-list">
                 <li><strong>Height:</strong> {pokemon.height / 10} m</li>
                 <li><strong>Weight:</strong> {pokemon.weight / 10} kg</li>
-                <li><strong>Base Experience:</strong> {pokemon.base_experience}</li>
+                <li><strong>Base XP:</strong> {pokemon.base_experience}</li>
               </ul>
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold mb-2">Types</h2>
-              <div className="flex gap-2">
+              <h2>Types</h2>
+              <div className="type-badges">
                 {pokemon.types.map((t) => (
-                  <span key={t.type.name} className="px-3 py-1 bg-zinc-200 rounded capitalize">
-                    {t.type.name}
-                  </span>
+                  <span key={t.type.name} className="type-badge">{t.type.name}</span>
                 ))}
               </div>
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold mb-2">Abilities</h2>
-              <ul className="list-disc list-inside capitalize">
+              <h2>Abilities</h2>
+              <ul>
                 {pokemon.abilities.map((a) => (
                   <li key={a.ability.name}>
-                    {a.ability.name} {a.is_hidden && <span className="text-xs text-zinc-400 font-normal">(Hidden)</span>}
+                    {a.ability.name}{' '}
+                    {a.is_hidden && <span style={{ fontSize: '0.75rem', color: '#a1a1aa' }}>(Hidden)</span>}
                   </li>
                 ))}
               </ul>
             </div>
           </div>
-        </section>
+        </div>
       </article>
     </main>
   );
