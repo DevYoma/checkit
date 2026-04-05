@@ -28,22 +28,22 @@ export default function PokemonSearchInput() {
   }, [localValue, setSearch]);
 
   return (
-    <div className="search-container mb-6">
+    <div className="search-container mb-12 max-w-6xl mx-auto px-4">
       <input
         type="search"
-        placeholder="Search Pokémon by name or ID..."
+        placeholder="Search by name or ID..."
         value={localValue}
         onChange={(e) => setLocalValue(e.target.value)}
-        className="search-input w-full p-2 border border-zinc-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 shadow-zinc-100"
+        className="search-input w-full p-8 text-2xl border-2 border-zinc-100 rounded-[2rem] shadow-xl shadow-zinc-100 focus:outline-none focus:ring-8 focus:ring-zinc-900/5 focus:border-zinc-900 transition-all placeholder:text-zinc-300 font-light"
         id="pokemon-search-input"
         aria-label="Search Pokémon"
       />
       {search && (
         <button 
           onClick={() => { setLocalValue(''); setSearch(null); }}
-          className="mt-1 text-xs text-zinc-500 hover:text-zinc-900"
+          className="mt-3 text-sm font-medium text-zinc-500 hover:text-zinc-900 flex items-center gap-1 mx-auto"
         >
-          Clear search
+          ✕ Clear Current Search
         </button>
       )}
     </div>

@@ -8,10 +8,6 @@ import PokemonList from '@/components/pokemon/pokemon-list';
  * SSR fetches page 1 data once at build/request time.
  * The result is passed as `initialData` to seed the React Query cache,
  * so the client renders instantly without a loading spinner on first paint.
- *
- * PokemonList is wrapped in <Suspense> because it uses `useSearchParams()`,
- * which opts the component into dynamic rendering. Suspense prevents the
- * server from blocking the entire page while waiting for client-side params.
  */
 export default async function Home() {
   const initialData = await pokemonService.getPokemonList({ limit: 20, offset: 0 });
@@ -27,7 +23,7 @@ export default async function Home() {
         </p>
       </header>
 
-      <Suspense fallback={<p>Loading Pokédex…</p>}>
+      <Suspense fallback={<p className="text-center py-12 text-zinc-400">Syncing with PokéAPI...</p>}>
         <PokemonList initialData={initialData} />
       </Suspense>
     </main>

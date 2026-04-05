@@ -82,6 +82,7 @@ export default function PokemonList({ initialData }: PokemonListProps) {
             <PokemonCard
               name={searchData.name}
               id={searchData.id}
+              priority={true}
               imageUrl={
                 searchData.sprites.other?.['official-artwork'].front_default ||
                 searchData.sprites.front_default
@@ -90,7 +91,7 @@ export default function PokemonList({ initialData }: PokemonListProps) {
           ) : null
         ) : (
           // LIST RESULTS
-          listData?.results.map((pokemon) => {
+          listData?.results.map((pokemon, index) => {
             const id = pokemon.url.split('/').filter(Boolean).pop() || '';
             const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
             return (
@@ -100,6 +101,7 @@ export default function PokemonList({ initialData }: PokemonListProps) {
                 id={id}
                 imageUrl={imageUrl}
                 url={pokemon.url}
+                priority={index < 4}
               />
             );
           })

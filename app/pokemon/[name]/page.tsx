@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { pokemonService } from '@/lib/services/pokemon.service';
 
 interface Props {
@@ -42,7 +43,7 @@ export default async function PokemonDetailPage({ params }: Props) {
   return (
     <main className="container p-6">
       <nav className="mb-6">
-        <Link href="/" className="back-link">
+        <Link href="/" className="back-link inline-block py-2 text-blue-600 hover:underline">
           ← Back to list
         </Link>
       </nav>
@@ -54,11 +55,14 @@ export default async function PokemonDetailPage({ params }: Props) {
         </header>
 
         <section className="grid md:grid-cols-2 gap-12 items-start">
-          <div className="image-wrapper bg-zinc-100 rounded-lg p-8">
-            <img 
+          <div className="image-wrapper bg-zinc-100 rounded-lg p-8 relative h-[400px] w-full">
+            <Image 
               src={imageUrl} 
               alt={pokemon.name} 
-              className="w-full h-auto"
+              fill
+              priority={true} // Above-the-fold image for detail page
+              className="object-contain p-4"
+              unoptimized={true}
             />
           </div>
 
